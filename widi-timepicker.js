@@ -127,11 +127,19 @@ function widiTPCancelTimePicker() {
 }
 
 // Demo functions
-function widiTPOpenTimePicker(selector) {
+function widiTPOpenTimePicker(selector, callback = function () { }) {
+    if (!$(selector).length) {
+        console.error('Selector not found, element tidak ditemukan:', selector);
+        return;
+    }
     const currentValue = $(selector).val() || '00:00';
     console.log('Opening TimePicker for:', selector, 'with initial value:', currentValue);
     widiTPOpenWidiTimePicker(currentValue, function(selectedTime) {
-        $(selector).val(selectedTime);
+        $(selector).val(selectedTime).change();
+        // Call the callback function if provided
+        if (typeof callback === 'function') {
+            callback(selectedTime);
+        }
     });
 }
 
