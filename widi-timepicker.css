@@ -7,7 +7,7 @@
             width: 100%;
             height: 100%;
             background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
+            z-index: 11001;
         }
 
         /* Modal Container */
@@ -21,6 +21,7 @@
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
             padding: 20px;
             min-width: 300px;
+            z-index: 11001;
         }
 
         /* Header */
@@ -104,7 +105,7 @@
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             padding: 15px;
-            z-index: 1001;
+            z-index: 11002;
             max-height: 300px;
             overflow-y: auto;
         }

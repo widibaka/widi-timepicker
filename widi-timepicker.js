@@ -51,13 +51,21 @@ function widiTPAdjustTime(type, delta) {
     if (type === 'hour') {
         widiTPCurrentHour = (widiTPCurrentHour + delta + 24) % 24;
     } else if (type === 'minute') {
-        const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
-        let currentIndex = minutes.indexOf(widiTPCurrentMinute);
-        if (currentIndex === -1) {
-            currentIndex = 0;
+        // const minutes = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
+        // let currentIndex = minutes.indexOf(widiTPCurrentMinute);
+        // if (currentIndex === -1) {
+        //     currentIndex = 0;
+        // }
+        // currentIndex = (currentIndex + delta + minutes.length) % minutes.length;
+        // widiTPCurrentMinute = minutes[currentIndex];
+
+        // update baru
+        widiTPCurrentMinute = widiTPCurrentMinute + delta;
+        if (widiTPCurrentMinute < 0) {
+            widiTPCurrentMinute = 59; // wrap around to 55
+        } else if (widiTPCurrentMinute >= 60) {
+            widiTPCurrentMinute = 0; // reset to 0
         }
-        currentIndex = (currentIndex + delta + minutes.length) % minutes.length;
-        widiTPCurrentMinute = minutes[currentIndex];
     }
     widiTPUpdateDisplay();
 }
@@ -119,19 +127,17 @@ function widiTPCancelTimePicker() {
 }
 
 // Demo functions
-function widiTPOpenTimePicker() {
-    const currentValue = $('#timeInput').val() || '00:00';
+function widiTPOpenTimePicker(selector) {
+    const currentValue = $(selector).val() || '00:00';
+    console.log('Opening TimePicker for:', selector, 'with initial value:', currentValue);
     widiTPOpenWidiTimePicker(currentValue, function(selectedTime) {
-        $('#timeInput').val(selectedTime);
+        $(selector).val(selectedTime);
     });
 }
 
 // Initialize when document is ready
 $(document).ready(function() {
     widiTPInitWidiTimePicker();
-    
-    // Make input clickable
-    $('#timeInput').on('click', widiTPOpenTimePicker);
 });
 
 // Public API
