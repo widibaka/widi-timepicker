@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Widi TimePicker Library</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="widi-timepicker.css">
+</head>
+<body>
+    <!-- Demo Section -->
+    <div class="demo-container">
+        <h1>Widi TimePicker Demo</h1>
+        <p>Klik input box atau button untuk membuka timepicker:</p>
+        
+        <input type="text" id="timeInput" class="demo-input" placeholder="Select time..." readonly>
+        <br>
+        <button class="demo-btn" onclick="widiTPOpenTimePicker()">Open TimePicker</button>
+        
+        <h3>Fitur:</h3>
+        <ul>
+            <li>Klik pada angka jam/menit untuk membuka grid pilihan</li>
+            <li>Gunakan panah atas/bawah untuk navigasi cepat</li>
+            <li>Klik "OK" untuk konfirmasi atau "Cancel" untuk membatalkan</li>
+            <li>Klik di luar modal untuk menutup</li>
+        </ul>
+    </div>
+
+    <!-- TimePicker Modal -->
+    <div class="widi-timepicker-overlay" id="widiTimePickerOverlay">
+        <div class="widi-timepicker-modal">
+            <div class="widi-timepicker-header">Pilih Waktu</div>
+            
+            <div class="widi-timepicker-display">
+                <!-- Hours Section -->
+                <div class="widi-timepicker-unit">
+                    <button class="widi-timepicker-arrow" onclick="widiTPAdjustTime('hour', 1)">↑</button>
+                    <div class="widi-timepicker-value" id="widiHourValue" onclick="widiTPShowOptions('hour')">00</div>
+                    <button class="widi-timepicker-arrow" onclick="widiTPAdjustTime('hour', -1)">↓</button>
+                </div>
+                
+                <!-- Separator -->
+                <div class="widi-timepicker-separator">:</div>
+                
+                <!-- Minutes Section -->
+                <div class="widi-timepicker-unit">
+                    <button class="widi-timepicker-arrow" onclick="widiTPAdjustTime('minute', 1)">↑</button>
+                    <div class="widi-timepicker-value" id="widiMinuteValue" onclick="widiTPShowOptions('minute')">00</div>
+                    <button class="widi-timepicker-arrow" onclick="widiTPAdjustTime('minute', -1)">↓</button>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="widi-timepicker-actions">
+                <!-- <button class="widi-timepicker-btn widi-timepicker-btn-cancel" onclick="widiTPCancelTimePicker()">Cancel</button> -->
+                <!-- <button class="widi-timepicker-btn widi-timepicker-btn-ok" onclick="widiTPConfirmTimePicker()">OK</button> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Options Modal -->
+    <div class="widi-timepicker-options" id="widiTimePickerOptions">
+        <div class="widi-timepicker-options-grid" id="widiOptionsGrid">
+            <!-- Options will be populated dynamically -->
+        </div>
+    </div>
+
+    <script src="widi-timepicker.js"></script>
+</body>
+</html>
